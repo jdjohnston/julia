@@ -6,13 +6,13 @@ Provide methods for retrieving information about hardware and the operating syst
 """ -> Sys
 
 export CPU_CORES,
+       CPU_NAME,
        WORD_SIZE,
        ARCH,
        MACHINE,
        KERNEL,
        JIT,
        cpu_info,
-       cpu_name,
        cpu_summary,
        uptime,
        loadavg,
@@ -71,8 +71,9 @@ function __init__()
         haskey(ENV,"JULIA_CPU_CORES") ? parse(Int,ENV["JULIA_CPU_CORES"]) :
                                         Int(ccall(:jl_cpu_cores, Int32, ()))
     global SC_CLK_TCK = ccall(:jl_SC_CLK_TCK, Clong, ())
-    global cpu_name = ccall(:jl_get_cpu_name, Ref{String}, ())
+    global CPU_NAME = ccall(:jl_get_cpu_name, Ref{String}, ())
     global JIT = ccall(:jl_get_JIT, Ref{String}, ())
+    @eval @Base.deprecate_binding cpu_name CPU_NAME
 end
 
 mutable struct UV_cpu_info_t

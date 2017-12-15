@@ -2164,6 +2164,9 @@ end
 @deprecate parse(str::AbstractString, pos::Int, ; kwargs...) Meta.parse(str, pos; kwargs...)
 @deprecate_binding ParseError Meta.ParseError
 
+# issue #20899
+# TODO: delete cpu_name deprecation in base/sysinfo.jl
+
 @eval LinAlg begin
     @deprecate chol!(x::Number, uplo) chol(x) false
 end
