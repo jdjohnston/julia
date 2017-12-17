@@ -1240,9 +1240,4 @@ export
     spzeros,
     rowvals,
     nzrange,
-    nnz,
-
-# Minimal set of Distributed exports - useful for a program to check if running
-# in distributed mode or not.
-    myid,
-    nprocs
+    nnz
